@@ -1,0 +1,19 @@
+@model CouncilAtelier.Models.Article
+
+<div class="popup-head">
+    <div class="popup-title">@Model.Title</div>
+    <div class="popup-meta">@Model.PublishedAt.Year</div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.Summary))
+{
+    <p class="popup-summary">@Model.Summary</p>
+}
+else
+{
+    <p class="popup-summary">Bu makale için henüz özet eklenmedi.</p>
+}
+
+<div class="popup-actions" style="display:flex; justify-content:flex-end; gap:10px;">
+    <a class="btn-solid" href="/Makaleler/@Model.Slug">Tamamını Oku</a>
+</div>

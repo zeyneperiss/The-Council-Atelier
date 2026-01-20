@@ -1,0 +1,60 @@
+@model List<CouncilAtelier.Models.Workshoplar>
+
+@{
+    ViewData["Title"] = "Admin • Son Silinen Workshoplar";
+}
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="page-title">Admin • Son Silinen Workshoplar</h1>
+    <p class="page-subtitle">Soft delete ile silinen workshoplar. İstersen geri yükleyebilirsin.</p>
+
+    <div style="margin-top:16px; display:flex; gap:10px;">
+      <a class="btn-outline" asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Index">Aktif Workshoplar</a>
+    </div>
+  </div>
+</section>
+
+<section class="list-section">
+  <div class="list-inner">
+    @if (Model == null || !Model.Any())
+    {
+        <p class="section-desc">Silinen workshop yok.</p>
+    }
+    else
+    {
+        <div class="atelier-list">
+        @foreach (var w in Model)
+        {
+            <div class="atelier-row">
+                <div>
+                    <div class="atelier-title">@w.Title</div>
+
+                    @if (w.Category != null)
+                    {
+                        <div class="article-summary">@w.Category.Name</div>
+                    }
+
+                    <div class="article-summary">@w.Description</div>
+                    <div class="article-summary">
+                        Silinme: @(w.DeletedAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm") ?? "-")
+                    </div>
+                </div>
+
+                <div class="atelier-right">
+                    <form asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Restore"
+                          method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@w.Id" />
+                        <button type="submit" class="btn-outline"
+                                onclick="return confirm('Geri yüklemek istediğine emin misin?');">
+                            Geri Yükle
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+        </div>
+    }
+  </div>
+</section>

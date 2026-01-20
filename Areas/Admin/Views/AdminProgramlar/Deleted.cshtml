@@ -1,0 +1,75 @@
+@model List<CouncilAtelier.Models.Programlar>
+
+@{
+    ViewData["Title"] = "Admin • Son Silinen Programlar";
+}
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="page-title">Admin • Son Silinenler</h1>
+    <p class="page-subtitle">Soft delete ile silinen programlar. İstersen geri yükleyebilirsin.</p>
+
+    <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn-outline" href="/Admin/AdminProgramlar">Aktif Programlar</a>
+    </div>
+  </div>
+</section>
+
+<section class="list-section">
+  <div class="list-inner">
+
+    @if (Model == null || !Model.Any())
+    {
+        <p class="section-desc">Silinen program yok.</p>
+    }
+    else
+    {
+        <div class="atelier-list">
+          @foreach (var p in Model)
+          {
+              <div class="atelier-row">
+                <div>
+                  <div class="atelier-title">@p.Title</div>
+
+                  @* Category navigation property varsa gösterelim *@
+                  @if (p.Category != null && !string.IsNullOrWhiteSpace(p.Category.Name))
+                  {
+                      <div class="article-summary">@p.Category.Name</div>
+                  }
+
+                  @if (!string.IsNullOrWhiteSpace(p.Description))
+                  {
+                      <div class="article-summary">
+                        @(p.Description.Length > 200 ? p.Description.Substring(0, 200) + "..." : p.Description)
+                      </div>
+                  }
+                </div>
+
+                <div class="atelier-right">
+                  @* DeletedAt varsa tarih gösterebiliriz *@
+                  @if (p.DeletedAt != null)
+                  {
+                      <span class="atelier-cat">@p.DeletedAt.Value.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</span>
+                  }
+
+                  <form asp-area="Admin"
+                        asp-controller="AdminProgramlar"
+                        asp-action="Restore"
+                        method="post"
+                        style="display:inline;">
+                      @Html.AntiForgeryToken()
+                      <input type="hidden" name="id" value="@p.Id" />
+                      <button type="submit"
+                              class="btn-outline"
+                              onclick="return confirm('Bu programı geri yüklemek istediğine emin misin?');">
+                          Geri Yükle
+                      </button>
+                  </form>
+                </div>
+              </div>
+          }
+        </div>
+    }
+
+  </div>
+</section>

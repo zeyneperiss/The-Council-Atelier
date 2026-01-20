@@ -1,0 +1,93 @@
+@{
+    ViewData["Title"] = "Giriş";
+    var returnUrl = ViewBag.ReturnUrl as string;
+    var error = ViewBag.Error as string;
+}
+
+<div class="login-container">
+    <div class="login-wrapper">
+        <!-- Sol Taraf: Görsel/Branding -->
+        <div class="login-visual">
+            <div class="login-visual-content">
+                <h2 class="login-visual-title">THE COUNCIL</h2>
+                <p class="login-visual-subtitle">ATELIER</p>
+                <div class="login-visual-line"></div>
+            </div>
+            <div class="login-pattern"></div>
+        </div>
+
+        <!-- Sağ Taraf: Form -->
+        <div class="login-form-section">
+            <div class="login-form-wrapper">
+                <div class="login-form-header">
+                    <h1 class="login-title">Hoş Geldin</h1>
+                    <p class="login-subtitle">Devam etmek için giriş yap</p>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(error))
+                {
+                    <div class="login-error">
+                        <span class="login-error-icon">⚠</span>
+                        <span>@error</span>
+                    </div>
+                }
+
+                <form method="post" asp-action="Login" asp-controller="Account" class="login-form">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+                    <div class="login-input-group">
+                        <label class="login-label">Kullanıcı Adı / E-posta</label>
+                        <div class="login-input-wrapper">
+                            <span class="login-input-icon">👤</span>
+                            <input name="username" 
+                                   type="text" 
+                                   class="login-input" 
+                                   placeholder="Admin veya öğrenci e-postası"
+                                   required
+                                   autocomplete="username" />
+                        </div>
+                    </div>
+
+                    <div class="login-input-group">
+                        <label class="login-label">Şifre</label>
+                        <div class="login-input-wrapper">
+                            <span class="login-input-icon">🔒</span>
+                            <input name="password" 
+                                   type="password" 
+                                   class="login-input" 
+                                   placeholder="Şifrenizi girin"
+                                   required
+                                   autocomplete="current-password" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-button">
+                        <span>Giriş Yap</span>
+                        <span class="login-button-arrow">→</span>
+                    </button>
+                </form>
+
+                <div class="login-demo-info">
+                    <span class="login-demo-badge">Demo Hesaplar</span>
+                    <div style="display: grid; gap: 12px; margin-top: 12px;">
+                        <p class="login-demo-text" style="margin: 0;">
+                            <strong>🔐 Admin:</strong><br />
+                            <span style="opacity: 0.8;">Kullanıcı: admin</span><br />
+                            <span style="opacity: 0.8;">Şifre: Admin123!</span>
+                        </p>
+                        <p class="login-demo-text" style="margin: 0;">
+                            <strong>👤 Öğrenci:</strong><br />
+                            <span style="opacity: 0.8;">E-posta: ogrenci@test.com</span><br />
+                            <span style="opacity: 0.8;">Şifre: Ogrenci123!</span>
+                        </p>
+                    </div>
+                </div>
+
+                <a asp-controller="Home" asp-action="Index" class="login-back-link">
+                    ← Anasayfaya Dön
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

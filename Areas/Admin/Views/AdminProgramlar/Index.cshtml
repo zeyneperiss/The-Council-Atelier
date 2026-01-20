@@ -1,0 +1,77 @@
+@model List<CouncilAtelier.Models.Programlar>
+
+@{
+    ViewData["Title"] = "Admin • Programlar";
+}
+
+<div class="admin-page">
+    <!-- Header -->
+    <div class="admin-page-header">
+        <div>
+            <h1 class="admin-page-title">Programlar</h1>
+            <p class="admin-page-subtitle">Program listesini yönet</p>
+        </div>
+        <div class="admin-page-actions">
+            <a class="admin-btn admin-btn-primary" asp-area="Admin" asp-controller="AdminProgramlar" asp-action="Create">
+                <span>+</span>
+                <span>Yeni Program</span>
+            </a>
+            <a class="admin-btn admin-btn-outline" asp-area="Admin" asp-controller="AdminProgramlar" asp-action="Deleted">
+                Son Silinenler
+            </a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    @if (Model == null || !Model.Any())
+    {
+        <div class="admin-empty-state">
+            <div class="admin-empty-icon"></div>
+            <h3>Henüz program yok</h3>
+            <p>Yeni program eklemek için yukarıdaki butona tıklayın</p>
+            <a class="admin-btn admin-btn-primary" asp-area="Admin" asp-controller="AdminProgramlar" asp-action="Create">
+                <span>+</span>
+                <span>İlk Programı Ekle</span>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="admin-content-grid">
+            @foreach (var p in Model)
+            {
+                <div class="admin-content-card">
+                    <div class="admin-content-card-body">
+                        <h3 class="admin-content-card-title">@p.Title</h3>
+                        
+                        @if (!string.IsNullOrWhiteSpace(p.Category?.Name))
+                        {
+                            <div class="admin-content-badge">@p.Category.Name</div>
+                        }
+                        
+                        @if (!string.IsNullOrWhiteSpace(p.Description))
+                        {
+                            <p class="admin-content-card-desc">
+                                @(p.Description.Length > 120 ? p.Description.Substring(0, 120) + "..." : p.Description)
+                            </p>
+                        }
+                    </div>
+                    
+                    <div class="admin-content-card-footer">
+                        <a class="admin-content-btn edit" asp-area="Admin" asp-controller="AdminProgramlar" asp-action="Edit" asp-route-id="@p.Id">
+                            Düzenle
+                        </a>
+                        
+                        <form asp-area="Admin" asp-controller="AdminProgramlar" asp-action="Delete" method="post" class="inline-form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@p.Id" />
+                            <button type="submit" class="admin-content-btn delete" onclick="return confirm('Bu programı silmek istediğine emin misin?');">
+                                Sil
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,134 @@
+@{
+    ViewData["Title"] = "Üye Ol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="login-container">
+    <div class="login-wrapper">
+        <!-- Sol Taraf - Görsel -->
+        <div class="login-visual">
+            <div class="login-pattern"></div>
+            <div class="login-visual-content">
+                <h2 class="login-visual-title">THE COUNCIL</h2>
+                <p class="login-visual-subtitle">COFFEE // ATELIER</p>
+                <div class="login-visual-line"></div>
+                <p class="login-visual-desc">
+                    Topluluğumuza katılın
+                </p>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf - Form -->
+        <div class="login-form-section">
+            <div class="login-form-wrapper">
+                <div class="login-form-header">
+                    <h1 class="login-title">Üye Ol</h1>
+                    <p class="login-subtitle">Yeni hesap oluşturun</p>
+                </div>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="login-error">
+                        <span class="login-error-icon">⚠</span>
+                        <span>@ViewBag.Error</span>
+                    </div>
+                }
+
+                <form asp-action="Index" method="post" class="login-form">
+                    <div class="login-input-group">
+                        <label class="login-label">Ad</label>
+                        <div class="login-input-wrapper">
+                            <input type="text" 
+                                   name="ad" 
+                                   class="login-input" 
+                                   placeholder="Adınız" 
+                                   required />
+                            <span class="login-input-icon">👤</span>
+                        </div>
+                    </div>
+
+                    <div class="login-input-group">
+                        <label class="login-label">Soyad</label>
+                        <div class="login-input-wrapper">
+                            <input type="text" 
+                                   name="soyad" 
+                                   class="login-input" 
+                                   placeholder="Soyadınız" 
+                                   required />
+                            <span class="login-input-icon">👤</span>
+                        </div>
+                    </div>
+
+                    <div class="login-input-group">
+                        <label class="login-label">E-Posta</label>
+                        <div class="login-input-wrapper">
+                            <input type="email" 
+                                   name="email" 
+                                   class="login-input" 
+                                   placeholder="ornek@email.com" 
+                                   required 
+                                   autocomplete="email" />
+                            <span class="login-input-icon">✉</span>
+                        </div>
+                    </div>
+
+                    <div class="login-input-group">
+                        <label class="login-label">Telefon (Opsiyonel)</label>
+                        <div class="login-input-wrapper">
+                            <input type="tel" 
+                                   name="telefon" 
+                                   class="login-input" 
+                                   placeholder="5XX XXX XX XX" />
+                            <span class="login-input-icon">📱</span>
+                        </div>
+                    </div>
+
+                    <div class="login-input-group">
+                        <label class="login-label">Şifre</label>
+                        <div class="login-input-wrapper">
+                            <input type="password" 
+                                   name="password" 
+                                   class="login-input" 
+                                   placeholder="••••••••" 
+                                   required 
+                                   autocomplete="new-password" />
+                            <span class="login-input-icon">🔒</span>
+                        </div>
+                    </div>
+
+                    <div class="login-input-group">
+                        <label class="login-label">Şifre Tekrar</label>
+                        <div class="login-input-wrapper">
+                            <input type="password" 
+                                   name="passwordConfirm" 
+                                   class="login-input" 
+                                   placeholder="••••••••" 
+                                   required 
+                                   autocomplete="new-password" />
+                            <span class="login-input-icon">🔒</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-button">
+                        <span>Üye Ol</span>
+                        <span class="login-button-arrow">→</span>
+                    </button>
+                </form>
+
+                <div class="login-demo-info">
+                    <p class="login-demo-text">
+                        Zaten hesabınız var mı? 
+                        <a asp-controller="OgrenciAuth" asp-action="Login" style="color: var(--text); font-weight: 700; text-decoration: underline;">
+                            Giriş Yap
+                        </a>
+                    </p>
+                </div>
+
+                <a asp-controller="Home" asp-action="Index" class="login-back-link">
+                    <span>←</span>
+                    <span>Ana Sayfaya Dön</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

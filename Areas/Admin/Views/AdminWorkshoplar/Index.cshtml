@@ -1,0 +1,77 @@
+@model List<CouncilAtelier.Models.Workshoplar>
+
+@{
+    ViewData["Title"] = "Admin • Workshoplar";
+}
+
+<div class="admin-page">
+    <!-- Header -->
+    <div class="admin-page-header">
+        <div>
+            <h1 class="admin-page-title">Workshoplar</h1>
+            <p class="admin-page-subtitle">Workshop (etkinlik) listesini yönet</p>
+        </div>
+        <div class="admin-page-actions">
+            <a class="admin-btn admin-btn-primary" asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Create">
+                <span>+</span>
+                <span>Yeni Workshop</span>
+            </a>
+            <a class="admin-btn admin-btn-outline" asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Deleted">
+                Son Silinenler
+            </a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    @if (Model == null || !Model.Any())
+    {
+        <div class="admin-empty-state">
+            <div class="admin-empty-icon"></div>
+            <h3>Henüz workshop yok</h3>
+            <p>Yeni workshop eklemek için yukarıdaki butona tıklayın</p>
+            <a class="admin-btn admin-btn-primary" asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Create">
+                <span>+</span>
+                <span>İlk Workshop'u Ekle</span>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="admin-content-grid">
+            @foreach (var w in Model)
+            {
+                <div class="admin-content-card">
+                    <div class="admin-content-card-body">
+                        <h3 class="admin-content-card-title">@w.Title</h3>
+                        
+                        @if (w.Category != null)
+                        {
+                            <div class="admin-content-badge">@w.Category.Name</div>
+                        }
+                        
+                        @if (!string.IsNullOrWhiteSpace(w.Description))
+                        {
+                            <p class="admin-content-card-desc">
+                                @(w.Description.Length > 120 ? w.Description.Substring(0, 120) + "..." : w.Description)
+                            </p>
+                        }
+                    </div>
+                    
+                    <div class="admin-content-card-footer">
+                        <a class="admin-content-btn edit" asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Edit" asp-route-id="@w.Id">
+                            Düzenle
+                        </a>
+                        
+                        <form asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Delete" method="post" class="inline-form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@w.Id" />
+                            <button type="submit" class="admin-content-btn delete" onclick="return confirm('Bu workshop\'u silmek istediğine emin misin?');">
+                                Sil
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

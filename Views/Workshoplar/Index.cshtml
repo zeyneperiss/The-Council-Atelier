@@ -1,0 +1,95 @@
+@model List<CouncilAtelier.Models.Workshoplar>
+
+@{
+    ViewData["Title"] = "Workshoplar";
+}
+
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <h1 class="page-title">Workshoplar</h1>
+        <p class="page-subtitle">
+            Kısa süreli etkinlikler ve uygulamalı atölyeler.
+        </p>
+    </div>
+</section>
+
+<section class="workshop-section">
+    <div class="workshop-container">
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="empty-state">
+                <p>Henüz yayınlanmış workshop bulunmuyor.</p>
+            </div>
+        }
+        else
+        {
+            <div class="workshop-grid">
+                @{
+                    var workshopImages = new[] { "WORKSHOP1.png", "workshop2.jpg", "workshop3.png", "workshop4.jpg" };
+                    var imageIndex = 0;
+                }
+                @foreach (var w in Model)
+                {
+                    // Eğer workshop'un kendi görseli varsa onu kullan, yoksa varsayılan döngüden seç
+                    var imageName = !string.IsNullOrEmpty(w.ImagePath) 
+                        ? w.ImagePath 
+                        : workshopImages[imageIndex % workshopImages.Length];
+                    imageIndex++;
+                    
+                    <div class="workshop-card">
+                        <div class="workshop-card-image">
+                            <img src="~/images/@imageName" alt="@w.Title" />
+                            @if (w.Category != null)
+                            {
+                                <span class="workshop-card-badge">@w.Category.Name</span>
+                            }
+                        </div>
+                        
+                        <div class="workshop-card-content">
+                            <h3 class="workshop-card-title">@w.Title</h3>
+                            
+                            <p class="workshop-card-desc">
+                                @w.Description
+                            </p>
+                            
+                            <div class="workshop-card-meta">
+                                @if (w.EventDate.HasValue)
+                                {
+                                    <div class="workshop-card-info">
+                                        <span class="workshop-icon">📅</span>
+                                        <span>@w.EventDate.Value.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</span>
+                                    </div>
+                                }
+                                
+                                @if (!string.IsNullOrWhiteSpace(w.Location))
+                                {
+                                    <div class="workshop-card-info">
+                                        <span class="workshop-icon">📍</span>
+                                        <span>@w.Location</span>
+                                    </div>
+                                }
+                                
+                                @if (w.Capacity.HasValue)
+                                {
+                                    <div class="workshop-card-info">
+                                        <span class="workshop-icon">👥</span>
+                                        <span>@w.Capacity kişi</span>
+                                    </div>
+                                }
+                            </div>
+                            
+                            <a class="workshop-card-btn"
+                               asp-controller="Workshoplar"
+                               asp-action="Details"
+                               asp-route-id="@w.Id">
+                                Detayları Gör
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+</section>

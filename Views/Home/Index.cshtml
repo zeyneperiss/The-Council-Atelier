@@ -1,0 +1,274 @@
+﻿@model CouncilAtelier.Models.HomeViewModel
+
+<div class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1 class="hero-title">THE COUNCIL ATELIER</h1>
+
+        <div class="hero-links">
+            <a class="hero-link" href="#programlar">Programlar</a>
+            <a class="hero-link" href="#workshoplar">Workshoplar</a>
+            <a class="hero-link" href="#makaleler">Makaleler</a>
+        </div>
+    </div>
+</div>
+
+<section id="programlar" class="section-block">
+    <div class="section-inner">
+        <div class="section-head">
+            <h2 class="section-title">Programlar</h2>
+            <a class="section-link" asp-controller="Programlar" asp-action="Index">Tümünü Gör</a>
+        </div>
+        <p class="section-desc">Sinema ve Fotoğraf programları.</p>
+
+        @if (Model?.Programlar != null && Model.Programlar.Any())
+        {
+            var sinemaProgramlari = Model.Programlar.Where(p => p.Category != null && p.Category.Name.Contains("Sinema", StringComparison.OrdinalIgnoreCase)).ToList();
+            var fotografProgramlari = Model.Programlar.Where(p => p.Category != null && p.Category.Name.Contains("Fotoğraf", StringComparison.OrdinalIgnoreCase)).ToList();
+
+            <!-- Program Category Cards -->
+            <div class="program-category-grid">
+                <!-- Sinema Card -->
+                <div class="program-category-card" onclick="openProgramModal('sinema')">
+                    <div class="program-category-icon">
+                        <span>🎬</span>
+                    </div>
+                    <h3 class="program-category-title">Sinema</h3>
+                    <p class="program-category-count">@sinemaProgramlari.Count Program</p>
+                    <div class="program-category-arrow">→</div>
+                </div>
+
+                <!-- Fotoğraf Card -->
+                <div class="program-category-card" onclick="openProgramModal('fotograf')">
+                    <div class="program-category-icon">
+                        <span>📸</span>
+                    </div>
+                    <h3 class="program-category-title">Fotoğraf</h3>
+                    <p class="program-category-count">@fotografProgramlari.Count Program</p>
+                    <div class="program-category-arrow">→</div>
+                </div>
+            </div>
+
+            <!-- Sinema Modal -->
+            <div id="sinema-modal" class="program-modal" onclick="closeProgramModal('sinema')">
+                <div class="program-modal-content" onclick="event.stopPropagation()">
+                    <div class="program-modal-header">
+                        <h2>Sinema Programları</h2>
+                        <button class="program-modal-close" onclick="closeProgramModal('sinema')">×</button>
+                    </div>
+                    <div class="program-modal-body">
+                        @if (sinemaProgramlari.Any())
+                        {
+                            <div class="program-grid">
+                                @foreach (var p in sinemaProgramlari)
+                                {
+                                    <div class="program-card">
+                                        <a asp-controller="Programlar" asp-action="Details" asp-route-id="@p.Id">
+                                            <div class="program-card-header">
+                                                <span class="program-card-category">@(p.Category?.Name ?? "Sinema")</span>
+                                            </div>
+                                            <div class="program-card-body">
+                                                <h3 class="program-card-title">@p.Title</h3>
+                                                <p class="program-card-desc">@p.Description</p>
+                                            </div>
+                                            <div class="program-card-footer">
+                                                <span class="program-card-link">
+                                                    Detayları Gör
+                                                    <span>→</span>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="section-desc">Henüz sinema programı eklenmedi.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fotoğraf Modal -->
+            <div id="fotograf-modal" class="program-modal" onclick="closeProgramModal('fotograf')">
+                <div class="program-modal-content" onclick="event.stopPropagation()">
+                    <div class="program-modal-header">
+                        <h2>Fotoğraf Programları</h2>
+                        <button class="program-modal-close" onclick="closeProgramModal('fotograf')">×</button>
+                    </div>
+                    <div class="program-modal-body">
+                        @if (fotografProgramlari.Any())
+                        {
+                            <div class="program-grid">
+                                @foreach (var p in fotografProgramlari)
+                                {
+                                    <div class="program-card">
+                                        <a asp-controller="Programlar" asp-action="Details" asp-route-id="@p.Id">
+                                            <div class="program-card-header">
+                                                <span class="program-card-category">@(p.Category?.Name ?? "Fotoğraf")</span>
+                                            </div>
+                                            <div class="program-card-body">
+                                                <h3 class="program-card-title">@p.Title</h3>
+                                                <p class="program-card-desc">@p.Description</p>
+                                            </div>
+                                            <div class="program-card-footer">
+                                                <span class="program-card-link">
+                                                    Detayları Gör
+                                                    <span>→</span>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="section-desc">Henüz fotoğraf programı eklenmedi.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="section-desc">Henüz program eklenmedi.</p>
+        }
+    </div>
+</section>
+
+<script>
+function openProgramModal(type) {
+    document.getElementById(type + '-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProgramModal(type) {
+    document.getElementById(type + '-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// ESC tuşu ile modal kapatma
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeProgramModal('sinema');
+        closeProgramModal('fotograf');
+    }
+});
+</script>
+
+<section id="workshoplar" class="section-block">
+    <div class="section-inner">
+        <div class="section-head">
+            <h2 class="section-title">Workshoplar</h2>
+            <a class="section-link" asp-controller="Workshoplar" asp-action="Index">Tümünü Gör</a>
+        </div>
+        <p class="section-desc">Kısa süreli atölyeler ve uygulamalı workshoplar.</p>
+
+        @if (Model?.Workshoplar != null && Model.Workshoplar.Any())
+        {
+            <div class="workshop-grid">
+                @{
+                    var workshopImages = new[] { "WORKSHOP1.png", "workshop2.jpg", "workshop3.png", "WORKSHOP1.png" };
+                    var imgIndex = 0;
+                }
+
+                @foreach (var w in Model.Workshoplar)
+                {
+                    // Eğer workshop'un kendi görseli varsa onu kullan, yoksa varsayılan döngüden seç
+                    var imageName = !string.IsNullOrEmpty(w.ImagePath) 
+                        ? w.ImagePath 
+                        : workshopImages[imgIndex % workshopImages.Length];
+                    imgIndex++;
+
+                    <div class="workshop-card">
+                        <a asp-controller="Workshoplar" asp-action="Details" asp-route-id="@w.Id">
+                            <div class="workshop-card-image">
+                                <img src="~/images/@imageName" alt="@w.Title" />
+                            </div>
+
+                            @if (w.Category != null)
+                            {
+                                <div class="workshop-card-badge">@w.Category.Name</div>
+                            }
+
+                            <div class="workshop-card-content">
+                                <h3 class="workshop-card-title">@w.Title</h3>
+                                <p class="workshop-card-desc">@w.Description</p>
+                            </div>
+
+                            <div class="workshop-card-meta">
+                                @if (w.EventDate.HasValue)
+                                {
+                                    <span class="workshop-card-date">📅 @w.EventDate.Value.ToString("dd MMM yyyy")</span>
+                                }
+                                @if (!string.IsNullOrEmpty(w.Location))
+                                {
+                                    <span class="workshop-card-location">📍 @w.Location</span>
+                                }
+                                @if (w.Capacity.HasValue)
+                                {
+                                    <span class="workshop-card-capacity">👥 @w.Capacity kişi</span>
+                                }
+                            </div>
+
+                            <button class="workshop-card-btn">Detayları Gör</button>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="section-desc">Henüz workshop eklenmedi.</p>
+        }
+    </div>
+</section>
+
+<section id="makaleler" class="section-block">
+    <div class="section-inner">
+        <div class="section-head">
+            <h2 class="section-title">Makaleler</h2>
+            <a class="section-link" asp-controller="Makaleler" asp-action="Index">Tümünü Gör</a>
+        </div>
+        <p class="section-desc">Sinema ve fotoğraf teorisi üzerine yazılar.</p>
+
+        @if (Model?.Articles != null && Model.Articles.Any())
+        {
+            <div class="article-grid">
+                @foreach (var a in Model.Articles)
+                {
+                    <article class="article-card">
+                        <a class="article-card-link" href="/Makaleler/@a.Slug">
+                            <div class="article-card-header">
+                                <span class="article-card-year">@a.PublishedAt.Year</span>
+                                <span class="article-card-date">@a.PublishedAt.ToString("dd MMMM")</span>
+                            </div>
+                            
+                            <div class="article-card-body">
+                                <h3 class="article-card-title">@a.Title</h3>
+                                @if (!string.IsNullOrWhiteSpace(a.Summary))
+                                {
+                                    <p class="article-card-summary">@a.Summary</p>
+                                }
+                            </div>
+
+                            <div class="article-card-footer">
+                                <span class="article-card-read">
+                                    Okumaya Başla
+                                    <span class="article-card-arrow">→</span>
+                                </span>
+                            </div>
+                        </a>
+                    </article>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="section-desc">Henüz makale eklenmedi.</p>
+        }
+    </div>
+</section>

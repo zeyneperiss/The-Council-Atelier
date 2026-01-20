@@ -1,0 +1,75 @@
+@model CouncilAtelier.Models.Programlar
+@{
+    ViewData["Title"] = "Program Düzenle";
+}
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="page-title">Program Düzenle</h1>
+    <p class="page-subtitle">Workshop/program bilgilerini güncelle.</p>
+  </div>
+</section>
+
+<section class="list-section">
+  <div class="list-inner">
+    <div class="admin-form-container">
+      <form asp-area="Admin" asp-controller="AdminProgramlar" asp-action="Edit" asp-route-id="@Model.Id" method="post">
+        @Html.AntiForgeryToken()
+
+        <!-- Temel Bilgiler -->
+        <div class="admin-form-card">
+          <div class="admin-form-section">
+            <h3 class="admin-form-section-title">
+              Program Bilgileri
+            </h3>
+            
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Başlık
+                  <span class="admin-form-label-required">*</span>
+                </label>
+                <input asp-for="Title" class="admin-form-input" placeholder="Program başlığını girin" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+              </div>
+            </div>
+
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Kategori
+                  <span class="admin-form-label-required">*</span>
+                </label>
+                <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="admin-form-select">
+                  <option value="">Kategori seçin</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+              </div>
+            </div>
+
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Açıklama
+                  <span class="admin-form-label-required">*</span>
+                </label>
+                <textarea asp-for="Description" class="admin-form-textarea" rows="6" placeholder="Program hakkında detaylı açıklama yazın..."></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="admin-form-actions">
+          <button type="submit" class="admin-btn-primary">
+            Değişiklikleri Kaydet
+          </button>
+          <a class="admin-btn-secondary" asp-area="Admin" asp-controller="AdminProgramlar" asp-action="Index">
+            Geri Dön
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

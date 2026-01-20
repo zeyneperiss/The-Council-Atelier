@@ -1,0 +1,91 @@
+@model CouncilAtelier.Models.Article
+
+<article class="article-detail-page">
+    <!-- Hero Section -->
+    <header class="article-detail-hero">
+        <div class="article-detail-hero-content">
+            <a href="/Makaleler" class="article-back-link">
+                <span>←</span>
+                <span>Makalelere Dön</span>
+            </a>
+            
+            <div class="article-meta-badge">
+                <span class="article-meta-year">@Model.PublishedAt.Year</span>
+                <span class="article-meta-divider">•</span>
+                <span class="article-meta-date">@Model.PublishedAt.ToString("dd MMMM yyyy")</span>
+            </div>
+
+            <h1 class="article-detail-title">@Model.Title</h1>
+
+            @if (!string.IsNullOrWhiteSpace(Model.Summary))
+            {
+                <p class="article-detail-summary">@Model.Summary</p>
+            }
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <section class="article-detail-content">
+        <div class="article-detail-container">
+            <div class="article-detail-body">
+                <div class="article-content-text">
+                    @Html.Raw(Model.Content.Replace("\n", "<br>"))
+                </div>
+            </div>
+
+            <!-- Sidebar Info -->
+            <aside class="article-detail-sidebar">
+                <div class="article-sidebar-card">
+                    <h3 class="article-sidebar-title">Makale Bilgileri</h3>
+                    <div class="article-sidebar-info">
+                        <div class="article-info-item">
+                            <svg class="article-info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <div class="article-info-text">
+                                <span class="article-info-label">Yayın Tarihi</span>
+                                <span class="article-info-value">@Model.PublishedAt.ToString("dd MMMM yyyy")</span>
+                            </div>
+                        </div>
+                        <div class="article-info-item">
+                            <svg class="article-info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                            <div class="article-info-text">
+                                <span class="article-info-label">Okuma Süresi</span>
+                                <span class="article-info-value">~@((Model.Content?.Length ?? 0) / 200) dk</span>
+                            </div>
+                        </div>
+                        <div class="article-info-item">
+                            <svg class="article-info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                            </svg>
+                            <div class="article-info-text">
+                                <span class="article-info-label">Kategori</span>
+                                <span class="article-info-value">Sinema & Fotoğraf</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-sidebar-cta">
+                    <h4 class="article-cta-title">İlgini Çekti mi?</h4>
+                    <p class="article-cta-text">Programlarımıza katılmak için başvurabilirsin.</p>
+                    <a href="/Basvuru" class="article-cta-button">
+                        <span>Başvur</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="article-detail-nav">
+        <div class="article-detail-container">
+            <a href="/Makaleler" class="article-nav-button">
+                ← Tüm Makalelere Dön
+            </a>
+        </div>
+    </nav>
+</article>

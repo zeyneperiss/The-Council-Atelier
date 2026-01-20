@@ -1,0 +1,313 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/obj/Debug/net8.0/scopedcss/projectbundle/CouncilAtelier.bundle.scp.css",
+      "PackagePath": "staticwebassets/CouncilAtelier.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/css/admin.css",
+      "PackagePath": "staticwebassets/css/admin.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/1006d232-1675-4966-bd93-34eba6794439.png",
+      "PackagePath": "staticwebassets/images/1006d232-1675-4966-bd93-34eba6794439.png"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/91e2ce13-49df-409d-a877-281529c84e1e.heic",
+      "PackagePath": "staticwebassets/images/91e2ce13-49df-409d-a877-281529c84e1e.heic"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/9a6f5412-017b-42ab-bdb4-810f9625b6fe.png",
+      "PackagePath": "staticwebassets/images/9a6f5412-017b-42ab-bdb4-810f9625b6fe.png"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/WORKSHOP1.png",
+      "PackagePath": "staticwebassets/images/WORKSHOP1.png"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/f53a2817-d52b-4a3c-8379-c1e570226718.png",
+      "PackagePath": "staticwebassets/images/f53a2817-d52b-4a3c-8379-c1e570226718.png"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/ffa3d6fa-167a-4b0d-baa7-852017d2c565.png",
+      "PackagePath": "staticwebassets/images/ffa3d6fa-167a-4b0d-baa7-852017d2c565.png"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/hero.jpg",
+      "PackagePath": "staticwebassets/images/hero.jpg"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/workshop2.jpg",
+      "PackagePath": "staticwebassets/images/workshop2.jpg"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/workshop3.png",
+      "PackagePath": "staticwebassets/images/workshop3.png"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/images/workshop4.jpg",
+      "PackagePath": "staticwebassets/images/workshop4.jpg"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/js/admin.js",
+      "PackagePath": "staticwebassets/js/admin.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/js/site.js",
+      "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/LICENSE",
+      "PackagePath": "staticwebassets/lib/bootstrap"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery-validation/LICENSE.md",
+      "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery/dist/jquery.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery/dist/jquery.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
+    },
+    {
+      "Id": "/Users/zh/Desktop/studentpackyeni/CouncilAtelier/wwwroot/lib/jquery/dist/jquery.min.map",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.CouncilAtelier.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.CouncilAtelier.props",
+      "PackagePath": "build\\CouncilAtelier.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.CouncilAtelier.props",
+      "PackagePath": "buildMultiTargeting\\CouncilAtelier.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.CouncilAtelier.props",
+      "PackagePath": "buildTransitive\\CouncilAtelier.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

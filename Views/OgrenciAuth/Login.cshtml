@@ -1,0 +1,87 @@
+@{
+    ViewData["Title"] = "Öğrenci Girişi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="login-container">
+    <div class="login-wrapper">
+        <!-- Sol Taraf - Görsel -->
+        <div class="login-visual">
+            <div class="login-pattern"></div>
+            <div class="login-visual-content">
+                <h2 class="login-visual-title">THE COUNCIL</h2>
+                <p class="login-visual-subtitle">COFFEE // ATELIER</p>
+                <div class="login-visual-line"></div>
+                <p class="login-visual-desc">
+                    Yaratıcı fikirlerin buluşma noktası
+                </p>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf - Form -->
+        <div class="login-form-section">
+            <div class="login-form-wrapper">
+                <div class="login-form-header">
+                    <h1 class="login-title">Giriş Yap</h1>
+                    <p class="login-subtitle">Hesabınıza giriş yapın</p>
+                </div>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="login-error">
+                        <span class="login-error-icon">⚠</span>
+                        <span>@ViewBag.Error</span>
+                    </div>
+                }
+
+                <form asp-action="Login" method="post" class="login-form">
+                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+                    <div class="login-input-group">
+                        <label class="login-label">E-Posta</label>
+                        <div class="login-input-wrapper">
+                            <input type="email" 
+                                   name="email" 
+                                   class="login-input" 
+                                   placeholder="ornek@email.com" 
+                                   required 
+                                   autocomplete="email" />
+                            <span class="login-input-icon">✉</span>
+                        </div>
+                    </div>
+
+                    <div class="login-input-group">
+                        <label class="login-label">Şifre</label>
+                        <div class="login-input-wrapper">
+                            <input type="password" 
+                                   name="password" 
+                                   class="login-input" 
+                                   placeholder="••••••••" 
+                                   required 
+                                   autocomplete="current-password" />
+                            <span class="login-input-icon">🔒</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-button">
+                        <span>Giriş Yap</span>
+                        <span class="login-button-arrow">→</span>
+                    </button>
+                </form>
+
+                <div class="login-demo-info">
+                    <span class="login-demo-badge">Demo Bilgileri</span>
+                    <p class="login-demo-text">
+                        <strong>E-Posta:</strong> ogrenci@test.com<br />
+                        <strong>Şifre:</strong> Ogrenci123!
+                    </p>
+                </div>
+
+                <a asp-controller="Home" asp-action="Index" class="login-back-link">
+                    <span>←</span>
+                    <span>Ana Sayfaya Dön</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

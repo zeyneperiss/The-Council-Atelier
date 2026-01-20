@@ -1,0 +1,78 @@
+@model List<CouncilAtelier.Models.Article>
+
+<div class="articles-page">
+    <div class="articles-hero">
+        <div class="articles-hero-content">
+            <div class="articles-hero-badge">Koleksiyon</div>
+            <h1 class="articles-hero-title">Makaleler</h1>
+            <p class="articles-hero-subtitle">
+                Sinema ve fotoğraf teorisi üzerine okuma notları, metin incelemeleri ve küratöryel seçkiler.
+            </p>
+            
+            <div class="articles-stats">
+                <div class="article-stat">
+                    <span class="article-stat-number">@Model.Count</span>
+                    <span class="article-stat-label">Makale</span>
+                </div>
+                <div class="article-stat-divider"></div>
+                <div class="article-stat">
+                    <span class="article-stat-number">@Model.Select(a => a.PublishedAt.Year).Distinct().Count()</span>
+                    <span class="article-stat-label">Yıl</span>
+                </div>
+                <div class="article-stat-divider"></div>
+                <div class="article-stat">
+                    <span class="article-stat-number">∞</span>
+                    <span class="article-stat-label">Fikir</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="articles-container">
+        @if (Model.Any())
+        {
+            <div class="articles-meta">
+                <p class="articles-count">
+                    <strong>@Model.Count makale</strong> bulunuyor
+                </p>
+            </div>
+
+            <div class="articles-grid">
+                @foreach (var a in Model)
+                {
+                    <article class="article-card" data-year="@a.PublishedAt.Year">
+                        <a class="article-card-link" href="/Makaleler/@a.Slug">
+                            <div class="article-card-header">
+                                <span class="article-card-year">@a.PublishedAt.Year</span>
+                                <span class="article-card-date">@a.PublishedAt.ToString("dd MMMM")</span>
+                            </div>
+                            
+                            <div class="article-card-body">
+                                <h3 class="article-card-title">@a.Title</h3>
+                                @if (!string.IsNullOrWhiteSpace(a.Summary))
+                                {
+                                    <p class="article-card-summary">@a.Summary</p>
+                                }
+                            </div>
+
+                            <div class="article-card-footer">
+                                <span class="article-card-read">
+                                    Okumaya Başla
+                                    <span class="article-card-arrow">→</span>
+                                </span>
+                            </div>
+                        </a>
+                    </article>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="articles-empty">
+                <div class="articles-empty-icon">📚</div>
+                <h3 class="articles-empty-title">Henüz makale yok</h3>
+                <p class="articles-empty-text">Yakında yeni içerikler eklenecek.</p>
+            </div>
+        }
+    </div>
+</div>

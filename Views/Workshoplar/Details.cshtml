@@ -1,0 +1,66 @@
+@model CouncilAtelier.Models.Workshoplar
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="detail-hero">
+    <div class="detail-inner">
+        <h1 class="detail-title">@Model.Title</h1>
+        
+        <div class="detail-meta">
+            @if (Model.Category != null)
+            {
+                <span class="detail-label">Kategori:</span>
+                <span>@Model.Category.Name</span>
+                <span style="margin: 0 8px;">•</span>
+            }
+            
+            @if (Model.EventDate.HasValue)
+            {
+                <span class="detail-label">Tarih:</span>
+                <span>@Model.EventDate.Value.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</span>
+            }
+            
+            @if (!string.IsNullOrWhiteSpace(Model.Location))
+            {
+                <span style="margin: 0 8px;">•</span>
+                <span class="detail-label">Konum:</span>
+                <span>@Model.Location</span>
+            }
+            
+            @if (Model.Capacity.HasValue)
+            {
+                <span style="margin: 0 8px;">•</span>
+                <span class="detail-label">Kontenjan:</span>
+                <span>@Model.Capacity kişi</span>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="detail-body">
+    <div class="detail-inner">
+        <div class="detail-text">
+            @Html.Raw(Model.Description.Replace("\n", "<br />"))
+        </div>
+        
+        <div class="detail-actions">
+            <a class="btn-outline" asp-controller="Workshoplar" asp-action="Index">
+                ← Tüm Workshop'lar
+            </a>
+        </div>
+        
+        <div class="detail-apply" id="basvuru">
+            <div class="apply-box">
+                <h2 class="apply-title">Bu workshop'a başvurmak ister misiniz?</h2>
+                <p class="apply-desc">
+                    Başvuru formunu doldurun, size en kısa sürede dönüş yapalım.
+                </p>
+                <a class="btn-solid" asp-controller="Basvuru" asp-action="Index" asp-route-type="Workshop" asp-route-item="@Model.Title">
+                    Başvuru Yap
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

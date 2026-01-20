@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CouncilAtelier</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CouncilAtelier.styles.css" asp-append-version="true" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<header class="site-header">
+    <div class="site-nav">
+        <a class="brand" asp-controller="Home" asp-action="Index">THE COUNCIL</a>
+
+        <div class="nav-actions">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                @if (User.IsInRole("Admin"))
+                {
+                    <!-- Admin kullanıcı için -->
+                    <a class="btn-outline" asp-area="Admin" asp-controller="AdminMakaleler" asp-action="Index">
+                        Admin Panel
+                    </a>
+                }
+                else if (User.IsInRole("Ogrenci"))
+                {
+                    <!-- Öğrenci kullanıcı için -->
+                    <a class="btn-outline" asp-controller="Ogrenci" asp-action="Index">
+                        Hoşgeldin, @User.Identity.Name!
+                    </a>
+                }
+                
+                <form asp-controller="Account" asp-action="Logout" method="post" style="display: inline; margin: 0;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-solid" style="cursor: pointer; border: none;">
+                        Çıkış Yap
+                    </button>
+                </form>
+            }
+            else
+            {
+                <!-- Giriş yapmamış kullanıcı için -->
+                <a class="btn-outline"
+                   asp-controller="OgrenciRegister"
+                   asp-action="Index">
+                    Üye Ol
+                </a>
+
+                <a class="btn-outline"
+                   asp-controller="Account"
+                   asp-action="Login">
+                    Giriş Yap
+                </a>
+            }
+
+            <a class="btn-solid"
+               asp-controller="Basvuru"
+               asp-action="Index">
+                Başvur
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="container" style="padding-top: 90px;">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-wrapper">
+        <!-- Ana Başlık -->
+        <div class="footer-hero">
+            <h2 class="footer-logo">THE COUNCIL</h2>
+            <p class="footer-tagline">COFFEE // ATELIER</p>
+        </div>
+
+        <!-- Grid İçerik -->
+        <div class="footer-grid">
+            <!-- Sol: Slogan & Açıklama -->
+            <div class="footer-col footer-main">
+                <h3 class="footer-slogan">MORE THAN COFFEE</h3>
+                <p class="footer-about">
+                    Kahve sadece bir içecek değil, bir bağlamdır. 
+                    Sanatsal atmosferde yaratıcı fikirlerin buluşma noktası.
+                </p>
+                <div class="footer-location">
+                    <span class="location-pin">📍</span>
+                    <span>Mavi Durak, Serdivan</span>
+                </div>
+            </div>
+
+            <!-- Orta: Navigasyon -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Keşfet</h4>
+                <nav class="footer-nav">
+                    <a asp-controller="Programlar" asp-action="Index">Programlar</a>
+                    <a asp-controller="Workshoplar" asp-action="Index">Workshoplar</a>
+                    <a asp-controller="Makaleler" asp-action="Index">Makaleler</a>
+                    <a asp-controller="Basvuru" asp-action="Index">Başvur</a>
+                </nav>
+            </div>
+
+            <!-- Sağ: İletişim -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Bağlantılar</h4>
+                <div class="footer-links">
+                    <a href="https://www.thecouncilcoffee.com" target="_blank" class="footer-link" rel="noopener">
+                        <span class="link-icon">🌐</span>
+                        <span>thecouncilcoffee.com</span>
+                    </a>
+                    <a href="mailto:info@thecouncilcoffee.com" class="footer-link">
+                        <span class="link-icon">✉</span>
+                        <span>info@@thecouncilcoffee.com</span>
+                    </a>
+                    <a href="https://instagram.com/thecouncilcoffee" target="_blank" class="footer-link" rel="noopener">
+                        <span class="link-icon">📷</span>
+                        <span>@@thecouncilcoffee</span>
+                    </a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=The+Council+Coffee+Serdivan" target="_blank" class="footer-link" rel="noopener">
+                        <span class="link-icon">📍</span>
+                        <span>Haritada Gör</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alt Bar -->
+        <div class="footer-bar">
+            <p class="footer-copy">&copy; 2026 THE COUNCIL COFFEE EXPERIMENT.</p>
+            <a asp-controller="Home" asp-action="Privacy" class="footer-privacy">Gizlilik</a>
+        </div>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

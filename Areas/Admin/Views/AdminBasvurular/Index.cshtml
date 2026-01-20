@@ -1,0 +1,310 @@
+@model List<CouncilAtelier.Models.Basvuru>
+@{
+    ViewData["Title"] = "Başvurular";
+    var pending = Model.Where(b => !b.IsRead).OrderByDescending(b => b.CreatedAt).ToList();
+    var processed = Model.Where(b => b.IsRead).OrderByDescending(b => b.CreatedAt).ToList();
+}
+
+<div class="admin-basvurular-page">
+    <!-- Header -->
+    <div class="admin-page-header">
+        <div>
+            <h1 class="admin-page-title">Başvurular</h1>
+            <p class="admin-page-subtitle">
+                Toplam @Model.Count başvuru
+                @if (pending.Count > 0)
+                {
+                    <span class="admin-highlight">• @pending.Count yeni</span>
+                }
+            </p>
+        </div>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="admin-empty-state">
+            <div class="admin-empty-icon"></div>
+            <h3>Henüz başvuru yok</h3>
+            <p>Formdan gelen başvurular burada görünecek</p>
+        </div>
+    }
+    else
+    {
+        <!-- Two Column Layout -->
+        <div class="admin-basvuru-columns">
+            <!-- Bekleyen Başvurular -->
+            <div class="admin-basvuru-section">
+                <div class="admin-basvuru-section-header">
+                    <h2 class="admin-basvuru-section-title">
+                        Bekleyen Başvurular
+                    </h2>
+                    <span class="admin-basvuru-count">@pending.Count</span>
+                </div>
+
+                @if (pending.Count == 0)
+                {
+                    <div class="admin-basvuru-empty">
+                        <p>Tüm başvurular işlendi</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="admin-basvuru-list">
+                        @foreach (var b in pending)
+                        {
+                            <div class="admin-basvuru-item" onclick="openBasvuruModal(@b.Id)">
+                                <div class="admin-basvuru-item-header">
+                                    <div class="admin-basvuru-avatar">
+                                        @b.FullName.Substring(0, 1).ToUpper()
+                                    </div>
+                                    <div class="admin-basvuru-item-info">
+                                        <h3 class="admin-basvuru-item-name">@b.FullName</h3>
+                                        <p class="admin-basvuru-item-email">@b.Email</p>
+                                    </div>
+                                    <span class="admin-basvuru-badge new">Yeni</span>
+                                </div>
+
+                                <div class="admin-basvuru-item-details">
+                                    <div class="admin-basvuru-detail-row">
+                                        <span class="admin-basvuru-detail-text">@b.Type</span>
+                                    </div>
+                                    @if (!string.IsNullOrWhiteSpace(b.SelectedItem))
+                                    {
+                                        <div class="admin-basvuru-detail-row">
+                                            <span class="admin-basvuru-detail-text">@b.SelectedItem</span>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(b.Phone))
+                                    {
+                                        <div class="admin-basvuru-detail-row">
+                                            <span class="admin-basvuru-detail-text">@b.Phone</span>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(b.Note))
+                                    {
+                                        <div class="admin-basvuru-detail-row">
+                                            <span class="admin-basvuru-detail-text note-preview">@(b.Note.Length > 50 ? b.Note.Substring(0, 50) + "..." : b.Note)</span>
+                                        </div>
+                                    }
+                                    <div class="admin-basvuru-detail-row">
+                                        <span class="admin-basvuru-detail-text">
+                                            @b.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="admin-basvuru-item-actions" onclick="event.stopPropagation()">
+                                    <form asp-area="Admin" asp-controller="AdminBasvurular" asp-action="ToggleRead" method="post" class="inline-form">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@b.Id" />
+                                        <button type="submit" class="admin-basvuru-btn success">
+                                            İşlenmiş Olarak İşaretle
+                                        </button>
+                                    </form>
+                                    <button onclick="openBasvuruModal(@b.Id)" class="admin-basvuru-btn info">
+                                        Detay
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- İşlenen Başvurular -->
+            <div class="admin-basvuru-section">
+                <div class="admin-basvuru-section-header">
+                    <h2 class="admin-basvuru-section-title">
+                        İşlenen Başvurular
+                    </h2>
+                    <span class="admin-basvuru-count">@processed.Count</span>
+                </div>
+
+                @if (processed.Count == 0)
+                {
+                    <div class="admin-basvuru-empty">
+                        <p>Henüz işlenmiş başvuru yok</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="admin-basvuru-list">
+                        @foreach (var b in processed)
+                        {
+                            <div class="admin-basvuru-item processed" onclick="openBasvuruModal(@b.Id)">
+                                <div class="admin-basvuru-item-header">
+                                    <div class="admin-basvuru-avatar">
+                                        @b.FullName.Substring(0, 1).ToUpper()
+                                    </div>
+                                    <div class="admin-basvuru-item-info">
+                                        <h3 class="admin-basvuru-item-name">@b.FullName</h3>
+                                        <p class="admin-basvuru-item-email">@b.Email</p>
+                                    </div>
+                                    <span class="admin-basvuru-badge processed">İşlendi</span>
+                                </div>
+
+                                <div class="admin-basvuru-item-details">
+                                    <div class="admin-basvuru-detail-row">
+                                        <span class="admin-basvuru-detail-text">@b.Type</span>
+                                    </div>
+                                    @if (!string.IsNullOrWhiteSpace(b.SelectedItem))
+                                    {
+                                        <div class="admin-basvuru-detail-row">
+                                            <span class="admin-basvuru-detail-text">@b.SelectedItem</span>
+                                        </div>
+                                    }
+                                    <div class="admin-basvuru-detail-row">
+                                        <span class="admin-basvuru-detail-text">
+                                            @b.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="admin-basvuru-item-actions" onclick="event.stopPropagation()">
+                                    <form asp-area="Admin" asp-controller="AdminBasvurular" asp-action="ToggleRead" method="post" class="inline-form">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@b.Id" />
+                                        <button type="submit" class="admin-basvuru-btn warning">
+                                            Bekleyenlere Taşı
+                                        </button>
+                                    </form>
+                                    <button onclick="openBasvuruModal(@b.Id)" class="admin-basvuru-btn info">
+                                        Detay
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @* MODAL POPUP *@
+    @foreach (var b in Model)
+    {
+        var hasNote = !string.IsNullOrWhiteSpace(b.Note);
+        
+        <div class="basvuru-modal" id="modal-@b.Id" onclick="closeBasvuruModal(@b.Id, event)">
+            <div class="basvuru-modal-content" onclick="event.stopPropagation()">
+                <div class="basvuru-modal-header">
+                    <h2>@b.FullName</h2>
+                    <button type="button" class="basvuru-modal-close" onclick="closeBasvuruModal(@b.Id)">×</button>
+                </div>
+
+                <div class="basvuru-modal-body">
+                    <div class="basvuru-modal-section">
+                        <div class="basvuru-modal-badge">
+                            <span class="admin-badge @(b.IsRead ? "is-read" : "is-new")">
+                                @(b.IsRead ? "İşlendi" : "Yeni")
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="basvuru-modal-section">
+                        <div class="basvuru-modal-row">
+                            <div class="basvuru-modal-label">📧 E-posta</div>
+                            <div class="basvuru-modal-value">
+                                <a href="mailto:@b.Email" class="admin-link">@b.Email</a>
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(b.Phone))
+                        {
+                            <div class="basvuru-modal-row">
+                                <div class="basvuru-modal-label">📱 Telefon</div>
+                                <div class="basvuru-modal-value">
+                                    <a href="tel:@b.Phone">@b.Phone</a>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="basvuru-modal-row">
+                            <div class="basvuru-modal-label">🏷️ Tür</div>
+                            <div class="basvuru-modal-value">@b.Type</div>
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(b.SelectedItem))
+                        {
+                            <div class="basvuru-modal-row">
+                                <div class="basvuru-modal-label">✨ İlgilendiği</div>
+                                <div class="basvuru-modal-value">@b.SelectedItem</div>
+                            </div>
+                        }
+
+                        <div class="basvuru-modal-row">
+                            <div class="basvuru-modal-label">📅 Tarih</div>
+                            <div class="basvuru-modal-value">
+                                @b.CreatedAt.ToLocalTime().ToString("dd MMMM yyyy, HH:mm")
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (hasNote)
+                    {
+                        <div class="basvuru-modal-section">
+                            <div class="basvuru-modal-label">📝 Not / Mesaj</div>
+                            <div class="basvuru-modal-note">@b.Note</div>
+                        </div>
+                    }
+                </div>
+
+                <div class="basvuru-modal-footer">
+                    <form asp-area="Admin" asp-controller="AdminBasvurular" asp-action="ToggleRead" method="post" class="inline-form">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@b.Id" />
+                        <button type="submit" class="admin-btn @(b.IsRead ? "warning" : "success")">
+                            @(b.IsRead ? "↺ Bekleyenlere Taşı" : "✓ İşlenmiş Olarak İşaretle")
+                        </button>
+                    </form>
+
+                    <form asp-area="Admin" asp-controller="AdminBasvurular" asp-action="Delete" method="post" class="inline-form">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@b.Id" />
+                        <button type="submit" class="admin-btn danger" onclick="return confirm('Bu başvuru kalıcı olarak silinecek. Emin misiniz?');">
+                            🗑️ Sil
+                        </button>
+                    </form>
+
+                    <button type="button" class="admin-btn" onclick="closeBasvuruModal(@b.Id)">
+                        Kapat
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+<script>
+function openBasvuruModal(id) {
+    const modal = document.getElementById('modal-' + id);
+    if (modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeBasvuruModal(id, event) {
+    if (event) {
+        event.stopPropagation();
+    }
+    const modal = document.getElementById('modal-' + id);
+    if (modal) {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+}
+
+// ESC tuşu ile kapat
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const openModal = document.querySelector('.basvuru-modal.is-open');
+        if (openModal) {
+            const id = openModal.id.replace('modal-', '');
+            closeBasvuruModal(id);
+        }
+    }
+});
+</script>
+}

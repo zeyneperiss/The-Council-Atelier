@@ -1,0 +1,69 @@
+@model List<CouncilAtelier.Models.Article>
+
+@{
+    ViewData["Title"] = "Admin • Son Silinenler";
+}
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="page-title">Admin • Son Silinenler</h1>
+    <p class="page-subtitle">Soft delete ile silinen makaleler. İstersen geri yükleyebilirsin.</p>
+
+    <div class="detail-actions" style="margin-top:14px;">
+      <a class="btn-outline" href="/Admin/AdminMakaleler">Aktif Makaleler</a>
+    </div>
+  </div>
+</section>
+
+<section class="list-section">
+  <div class="list-inner">
+
+    @if (Model == null || !Model.Any())
+    {
+        <p class="section-desc">Silinen makale yok.</p>
+    }
+    else
+    {
+        <div class="atelier-list">
+          @foreach (var a in Model)
+          {
+              <div class="atelier-row">
+                <div>
+                  <div class="atelier-title">@a.Title</div>
+
+                  @if (!string.IsNullOrWhiteSpace(a.Summary))
+                  {
+                      <div class="article-summary">@a.Summary</div>
+                  }
+
+                  @if (a.DeletedAt != null)
+                  {
+                      <div class="article-summary">Silinme: @a.DeletedAt.Value.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                  }
+                </div>
+
+                <div class="atelier-right">
+                  <span class="atelier-cat">@a.PublishedAt.Year</span>
+
+                  <form asp-area="Admin"
+                        asp-controller="AdminMakaleler"
+                        asp-action="Restore"
+                        method="post"
+                        style="display:inline;">
+                      @Html.AntiForgeryToken()
+                      <input type="hidden" name="id" value="@a.Id" />
+                      <button type="submit"
+                              class="btn-solid"
+                              onclick="return confirm('Bu makaleyi geri yüklemek istiyor musun?');">
+                          Geri Yükle
+                      </button>
+                  </form>
+                </div>
+
+              </div>
+          }
+        </div>
+    }
+
+  </div>
+</section>

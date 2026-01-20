@@ -1,0 +1,47 @@
+@model List<CouncilAtelier.Models.Programlar>
+
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <h1 class="page-title">Atölyeler</h1>
+        <p class="page-subtitle">Sinema ve fotoğraf programları, workshoplar ve küratöryel içerikler.</p>
+    </div>
+</section>
+
+<section class="list-section">
+    <div class="list-inner">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="empty-state">
+                <p>Henüz program eklenmedi.</p>
+            </div>
+        }
+        else
+        {
+            <div class="program-grid">
+                @foreach (var p in Model)
+                {
+                    <div class="program-card">
+                        <a asp-action="Details" asp-route-id="@p.Id">
+                            <div class="program-card-header">
+                                @if (p.Category != null)
+                                {
+                                    <span class="program-card-category">@p.Category.Name</span>
+                                }
+                            </div>
+                            <div class="program-card-body">
+                                <h3 class="program-card-title">@p.Title</h3>
+                                <p class="program-card-desc">@p.Description</p>
+                            </div>
+                            <div class="program-card-footer">
+                                <span class="program-card-link">
+                                    Detayları Gör
+                                    <span>→</span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

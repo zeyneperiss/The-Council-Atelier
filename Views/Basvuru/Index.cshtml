@@ -1,0 +1,261 @@
+@model CouncilAtelier.Models.Basvuru
+@{
+    ViewData["Title"] = "Başvur";
+    var success = (ViewBag.Success as bool?) == true;
+}
+
+<div class="apply-container">
+    <div class="apply-wrapper">
+        <!-- Sol Taraf: Bilgilendirme -->
+        <div class="apply-info-section">
+            <div class="apply-info-content">
+                <div class="apply-info-badge">Başvuru</div>
+                <h1 class="apply-info-title">Bize Katıl</h1>
+                <p class="apply-info-desc">
+                    The Council Atelier'e hoş geldin. Program ve workshoplarımıza katılmak için 
+                    formu doldur, en kısa sürede seninle iletişime geçelim.
+                </p>
+
+                <div class="apply-features">
+                    <div class="apply-feature">
+                        <span class="apply-feature-icon">🎬</span>
+                        <div class="apply-feature-text">
+                            <strong>Sinema Programları</strong>
+                            <span>Film analizi ve eleştiri</span>
+                        </div>
+                    </div>
+                    <div class="apply-feature">
+                        <span class="apply-feature-icon">📷</span>
+                        <div class="apply-feature-text">
+                            <strong>Fotoğraf Atölyeleri</strong>
+                            <span>Uygulamalı çalışmalar</span>
+                        </div>
+                    </div>
+                    <div class="apply-feature">
+                        <span class="apply-feature-icon">✍️</span>
+                        <div class="apply-feature-text">
+                            <strong>Makale ve Tartışma</strong>
+                            <span>Teorik derinlik</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="apply-contact-info">
+                    <p class="apply-contact-item">
+                        <span class="apply-contact-icon">✉</span>
+                        info@@thecouncilcoffee.com
+                    </p>
+                    <p class="apply-contact-item">
+                        <span class="apply-contact-icon">📍</span>
+                        Mavi Durak, Serdivan
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: Form -->
+        <div class="apply-form-section">
+            <div class="apply-form-wrapper">
+                <div class="apply-form-header">
+                    <h2 class="apply-form-title">Başvuru Formu</h2>
+                    <p class="apply-form-subtitle">Lütfen bilgilerini eksiksiz doldur</p>
+                </div>
+
+                <form asp-action="Index" asp-controller="Basvuru" method="post" class="apply-form">
+                    @Html.AntiForgeryToken()
+
+                    <div class="apply-input-group">
+                        <label class="apply-label">Ad Soyad *</label>
+                        <div class="apply-input-wrapper">
+                            <span class="apply-input-icon">👤</span>
+                            <input asp-for="FullName" 
+                                   class="apply-input" 
+                                   placeholder="Adın ve soyadın"
+                                   autocomplete="name" />
+                        </div>
+                        <span asp-validation-for="FullName" class="apply-error"></span>
+                    </div>
+
+                    <div class="apply-input-group">
+                        <label class="apply-label">E-posta *</label>
+                        <div class="apply-input-wrapper">
+                            <span class="apply-input-icon">📧</span>
+                            <input asp-for="Email" 
+                                   class="apply-input" 
+                                   placeholder="ornek@email.com"
+                                   autocomplete="email" />
+                        </div>
+                        <span asp-validation-for="Email" class="apply-error"></span>
+                    </div>
+
+                    <div class="apply-input-group">
+                        <label class="apply-label">Telefon</label>
+                        <div class="apply-input-wrapper">
+                            <span class="apply-input-icon">📱</span>
+                            <input asp-for="Phone" 
+                                   class="apply-input" 
+                                   placeholder="0555 123 45 67"
+                                   autocomplete="tel" />
+                        </div>
+                        <span asp-validation-for="Phone" class="apply-error"></span>
+                    </div>
+
+                    <div class="apply-input-group">
+                        <label class="apply-label">Başvuru Türü *</label>
+                        <div class="apply-input-wrapper">
+                            <span class="apply-input-icon">📋</span>
+                            <select asp-for="Type" class="apply-input apply-select">
+                                <option value="Belirsiz">Seçiniz</option>
+                                <option value="Program">Program</option>
+                                <option value="Workshop">Workshop</option>
+                            </select>
+                        </div>
+                        <span asp-validation-for="Type" class="apply-error"></span>
+                    </div>
+
+                    <div class="apply-input-group">
+                        <label class="apply-label">İlgilendiğin Program/Workshop</label>
+                        <div class="apply-input-wrapper">
+                            <span class="apply-input-icon">🎯</span>
+                            <select asp-for="SelectedItem" 
+                                    class="apply-input apply-select" 
+                                    id="selectedItemDropdown">
+                                <option value="">-- Seçiniz --</option>
+                                @{
+                                    var programlar = ViewBag.Programlar as IEnumerable<dynamic>;
+                                    var workshoplar = ViewBag.Workshoplar as IEnumerable<dynamic>;
+                                }
+                                @if (programlar != null && programlar.Any())
+                                {
+                                    <optgroup label="📚 Programlar">
+                                        @foreach (var program in programlar)
+                                        {
+                                            <option value="@program.Title">@program.Title</option>
+                                        }
+                                    </optgroup>
+                                }
+                                @if (workshoplar != null && workshoplar.Any())
+                                {
+                                    <optgroup label="🎨 Workshoplar">
+                                        @foreach (var workshop in workshoplar)
+                                        {
+                                            <option value="@workshop.Title">@workshop.Title</option>
+                                        }
+                                    </optgroup>
+                                }
+                            </select>
+                        </div>
+                        <span asp-validation-for="SelectedItem" class="apply-error"></span>
+                    </div>
+
+                    <div class="apply-input-group">
+                        <label class="apply-label">Not veya Mesajın</label>
+                        <div class="apply-input-wrapper">
+                            <span class="apply-input-icon apply-textarea-icon">💬</span>
+                            <textarea asp-for="Note" 
+                                      class="apply-input apply-textarea" 
+                                      rows="4"
+                                      placeholder="Bize iletmek istediğin bir şeyler varsa..."></textarea>
+                        </div>
+                        <span asp-validation-for="Note" class="apply-error"></span>
+                    </div>
+
+                    <div class="apply-form-actions">
+                        <button type="submit" class="apply-submit-btn">
+                            <span>Başvuruyu Gönder</span>
+                            <span class="apply-btn-icon">→</span>
+                        </button>
+                        <a href="/" class="apply-cancel-btn">
+                            ← Vazgeç
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="apply-modal" id="thanksModal" style="display: none;">
+    <div class="apply-modal-backdrop"></div>
+    <div class="apply-modal-content">
+        <div class="apply-modal-icon">✓</div>
+        <h3 class="apply-modal-title">Başvurun Alındı!</h3>
+        <p class="apply-modal-text">
+            Teşekkürler! En kısa sürede seninle iletişime geçeceğiz.
+        </p>
+        <button type="button" class="apply-modal-btn" id="modalCloseBtn">
+            Tamam
+        </button>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function () {
+            var success = @success.ToString().ToLowerInvariant();
+            if (success) {
+                var modal = document.getElementById('thanksModal');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
+                function closeModal() {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                    window.location.href = "/";
+                }
+
+                var btn = document.getElementById("modalCloseBtn");
+                if (btn) btn.addEventListener("click", closeModal);
+                
+                modal.addEventListener("click", function(e) {
+                    if (e.target === modal) closeModal();
+                });
+            }
+
+            // Başvuru türüne göre program/workshop dropdown'ını filtrele
+            var typeSelect = document.querySelector('select[name="Type"]');
+            var itemSelect = document.getElementById('selectedItemDropdown');
+            
+            if (typeSelect && itemSelect) {
+                // Tüm option'ları sakla
+                var allOptions = Array.from(itemSelect.querySelectorAll('option, optgroup'));
+                
+                function filterItems() {
+                    var selectedType = typeSelect.value;
+                    
+                    // Önce tüm option'ları temizle
+                    itemSelect.innerHTML = '<option value="">-- Seçiniz --</option>';
+                    
+                    if (selectedType === 'Program') {
+                        // Sadece programları göster
+                        var programGroup = allOptions.find(opt => opt.tagName === 'OPTGROUP' && opt.label.includes('Programlar'));
+                        if (programGroup) {
+                            itemSelect.appendChild(programGroup.cloneNode(true));
+                        }
+                    } else if (selectedType === 'Workshop') {
+                        // Sadece workshopları göster
+                        var workshopGroup = allOptions.find(opt => opt.tagName === 'OPTGROUP' && opt.label.includes('Workshoplar'));
+                        if (workshopGroup) {
+                            itemSelect.appendChild(workshopGroup.cloneNode(true));
+                        }
+                    } else {
+                        // Belirsiz - hepsini göster
+                        allOptions.forEach(function(opt) {
+                            if (opt.tagName === 'OPTGROUP') {
+                                itemSelect.appendChild(opt.cloneNode(true));
+                            }
+                        });
+                    }
+                }
+                
+                typeSelect.addEventListener('change', filterItems);
+                
+                // Sayfa yüklendiğinde bir kez çalıştır
+                filterItems();
+            }
+        })();
+    </script>
+}

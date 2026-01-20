@@ -1,0 +1,122 @@
+@model CouncilAtelier.Models.Basvuru
+@{
+    ViewData["Title"] = "Başvur";
+    var success = (ViewBag.Success as bool?) == true;
+}
+
+<section class="basvuru-page">
+    <div class="basvuru-wrap">
+        <div class="basvuru-head">
+            <h1 class="basvuru-title">Başvuru</h1>
+            <p class="basvuru-sub">
+                Program veya workshop başvurunu buradan iletebilirsin.
+            </p>
+        </div>
+
+        <div class="basvuru-card">
+            <form asp-action="Index" asp-controller="Basvuru" method="post" class="basvuru-form">
+                @Html.AntiForgeryToken()
+
+                <div class="field">
+                    <input asp-for="FullName" class="form-input" placeholder=" " autocomplete="name" />
+                    <label asp-for="FullName" class="field-label">Ad Soyad</label>
+                    <span asp-validation-for="FullName" class="field-error"></span>
+                </div>
+
+                <div class="field">
+                    <input asp-for="Email" class="form-input" placeholder=" " autocomplete="email" />
+                    <label asp-for="Email" class="field-label">E-posta</label>
+                    <span asp-validation-for="Email" class="field-error"></span>
+                </div>
+
+                <div class="field">
+                    <input asp-for="Phone" class="form-input" placeholder=" " autocomplete="tel" />
+                    <label asp-for="Phone" class="field-label">Telefon (opsiyonel)</label>
+                    <span asp-validation-for="Phone" class="field-error"></span>
+                </div>
+
+                <div class="field">
+                    <select asp-for="Type" class="form-input form-select">
+                        <option value="Belirsiz">Seçiniz</option>
+                        <option value="Program">Program</option>
+                        <option value="Workshop">Workshop</option>
+                    </select>
+                    <label asp-for="Type" class="field-label field-label-static">Başvuru Türü</label>
+                    <span asp-validation-for="Type" class="field-error"></span>
+                </div>
+
+                <div class="field">
+                    <input asp-for="SelectedItem" class="form-input" placeholder=" " />
+                    <label asp-for="SelectedItem" class="field-label">İlgilendiğin Program/Workshop (opsiyonel)</label>
+                    <span asp-validation-for="SelectedItem" class="field-error"></span>
+                </div>
+
+                <div class="field">
+                    <textarea asp-for="Note" class="form-input form-textarea" rows="5" placeholder=" "></textarea>
+                    <label asp-for="Note" class="field-label">Not (opsiyonel)</label>
+                    <span asp-validation-for="Note" class="field-error"></span>
+                </div>
+
+                <div class="basvuru-actions">
+                    <button type="submit" class="btn-solid">Başvuruyu Gönder</button>
+                    <a class="btn-outline" href="/">Vazgeç</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Teşekkür Modal (Council stil) -->
+<div class="modal fade council-modal" id="thanksModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content council-modal-card">
+            <div class="council-modal-head">
+                <div>
+                    <div class="council-modal-title">Teşekkürler</div>
+                    <div class="council-modal-sub">Başvurun başarıyla alındı.</div>
+                </div>
+
+                <button type="button"
+                        class="council-modal-x"
+                        data-bs-dismiss="modal"
+                        aria-label="Kapat">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="council-modal-body">
+                En kısa sürede seninle iletişime geçeceğiz.
+            </div>
+
+            <div class="council-modal-actions">
+                <button type="button"
+                        class="btn-solid"
+                        data-bs-dismiss="modal"
+                        id="modalCloseBtn">
+                    Tamam
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function () {
+            var success = @success.ToString().ToLowerInvariant();
+            if (!success) return;
+
+            var modalEl = document.getElementById('thanksModal');
+            var modal = new bootstrap.Modal(modalEl);
+            modal.show();
+
+            function goHome() { window.location.href = "/"; }
+
+            modalEl.addEventListener('hidden.bs.modal', goHome);
+            var btn = document.getElementById("modalCloseBtn");
+            if (btn) btn.addEventListener("click", goHome);
+        })();
+    </script>
+}

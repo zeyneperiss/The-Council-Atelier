@@ -1,0 +1,150 @@
+@model CouncilAtelier.Models.Article
+
+@{
+    ViewData["Title"] = "Yeni Makale";
+}
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="page-title">Yeni Makale</h1>
+    <p class="page-subtitle">Yeni bir makale ekle.</p>
+  </div>
+</section>
+
+<section class="list-section">
+  <div class="list-inner">
+    <div class="admin-form-container">
+      <form asp-area="Admin" asp-controller="AdminMakaleler" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <!-- Temel Bilgiler -->
+        <div class="admin-form-card">
+          <div class="admin-form-section">
+            <h3 class="admin-form-section-title">
+              Makale Bilgileri
+            </h3>
+            
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Başlık
+                  <span class="admin-form-label-required">*</span>
+                </label>
+                <input asp-for="Title" class="admin-form-input" placeholder="Makale başlığını girin" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+              </div>
+            </div>
+
+            <div class="admin-form-row two-cols">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Slug (URL)
+                  <span class="admin-form-label-optional">(opsiyonel)</span>
+                </label>
+                <input asp-for="Slug" class="admin-form-input" placeholder="makale-url-adresi" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+                <p class="admin-form-hint">Boş bırakırsanız otomatik oluşturulur</p>
+              </div>
+
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Yayın Tarihi
+                  <span class="admin-form-label-required">*</span>
+                </label>
+                <input asp-for="PublishedAt" type="datetime-local" class="admin-form-input" 
+                       value="@Model.PublishedAt.ToString("yyyy-MM-ddTHH:mm")" />
+                <span asp-validation-for="PublishedAt" class="text-danger"></span>
+              </div>
+            </div>
+
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Özet
+                  <span class="admin-form-label-optional">(opsiyonel)</span>
+                </label>
+                <textarea asp-for="Summary" class="admin-form-textarea" rows="4" placeholder="Makale özetini yazın..."></textarea>
+                <span asp-validation-for="Summary" class="text-danger"></span>
+                <p class="admin-form-hint">Makale listelerinde gösterilecek kısa açıklama</p>
+              </div>
+            </div>
+
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  İçerik
+                  <span class="admin-form-label-required">*</span>
+                </label>
+                <textarea asp-for="Content" class="admin-form-textarea" rows="12" placeholder="Makale içeriğini yazın..."></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="admin-form-actions">
+          <button type="submit" class="admin-btn-primary">
+            Makale Oluştur
+          </button>
+          <a class="admin-btn-secondary" href="/Admin/AdminMakaleler">
+            İptal
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+    @section Scripts {
+    <script>
+        (function () {
+            const titleInput = document.querySelector('input[name="Title"]');
+            const slugInput  = document.querySelector('input[name="Slug"]');
+
+            if (!titleInput || !slugInput) return;
+
+            // Kullanıcı slug'a dokunduysa artık otomatik ezmeyelim
+            let slugTouched = false;
+            slugInput.addEventListener('input', () => {
+                slugTouched = slugInput.value.trim().length > 0;
+            });
+
+            function slugifyTR(text) {
+                if (!text) return "";
+
+                text = text.trim().toLowerCase();
+
+                // Türkçe karakterler
+                text = text
+                    .replace(/ğ/g, "g")
+                    .replace(/ü/g, "u")
+                    .replace(/ş/g, "s")
+                    .replace(/ı/g, "i")
+                    .replace(/ö/g, "o")
+                    .replace(/ç/g, "c");
+
+                // Boşluk/alt çizgi -> tire
+                text = text.replace(/[\s_]+/g, "-");
+
+                // Harf-rakam-tire dışını sil
+                text = text.replace(/[^a-z0-9-]/g, "");
+
+                // Çoklu tire -> tek tire
+                text = text.replace(/-+/g, "-");
+
+                // Baştaki/sondaki tireleri kırp
+                text = text.replace(/^-|-$/g, "");
+
+                return text;
+            }
+
+            titleInput.addEventListener('input', () => {
+                if (slugTouched) return; // kullanıcı manuel girmişse karışma
+                slugInput.value = slugifyTR(titleInput.value);
+            });
+        })();
+    </script>
+}
+
+  </div>
+</section>

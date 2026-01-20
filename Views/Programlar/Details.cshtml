@@ -1,0 +1,36 @@
+@model CouncilAtelier.Models.Programlar
+
+<section class="detail-hero">
+    <div class="detail-inner">
+        <h1 class="detail-title">@Model.Title</h1>
+        <div class="detail-meta">
+            <span class="detail-label">Kategori:</span>
+            <span class="detail-value">@Model.Category?.Name</span>
+        </div>
+    </div>
+</section>
+
+<section class="detail-body">
+    <div class="detail-inner">
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+            <p class="detail-text">@Model.Description</p>
+        }
+        else
+        {
+            <p class="detail-text muted">Bu atölye için açıklama eklenmemiş.</p>
+        }
+
+        <div class="detail-actions">
+            <a class="btn-outline" asp-action="Index">Listeye Dön</a>
+        </div>
+
+        <div class="detail-apply" id="basvuru">
+            <div class="apply-box">
+                <h3 class="apply-title">Başvuru</h3>
+                <p class="apply-desc">Bu atölyeye başvurmak için devam edin.</p>
+                <a class="btn-solid" href="#">Başvur</a>
+            </div>
+        </div>
+    </div>
+</section>

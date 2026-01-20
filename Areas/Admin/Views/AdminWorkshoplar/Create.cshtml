@@ -1,0 +1,139 @@
+@model CouncilAtelier.Models.Workshoplar
+
+@{
+    ViewData["Title"] = "Admin • Yeni Workshop";
+    var categories = ViewBag.Categories as List<CouncilAtelier.Models.Category> ?? new();
+}
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1 class="page-title">Yeni Workshop</h1>
+    <p class="page-subtitle">Yeni bir etkinlik/workshop ekle.</p>
+  </div>
+</section>
+
+<section class="list-section">
+  <div class="list-inner">
+    <div class="admin-form-container">
+      <form asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <!-- Temel Bilgiler -->
+        <div class="admin-form-card">
+          <div class="admin-form-section">
+            <h3 class="admin-form-section-title">
+              Temel Bilgiler
+            </h3>
+            
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Başlık
+                  <span class="admin-form-label-required">*</span>
+                </label>
+                <input asp-for="Title" class="admin-form-input" placeholder="Workshop başlığını girin" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+              </div>
+            </div>
+
+            <div class="admin-form-row two-cols">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Kategori
+                  <span class="admin-form-label-required">*</span>
+                </label>
+                <select asp-for="CategoryId" class="admin-form-select">
+                  @foreach (var c in categories)
+                  {
+                    <option value="@c.Id">@c.Name</option>
+                  }
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+              </div>
+
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Etkinlik Tarihi
+                  <span class="admin-form-label-optional">(opsiyonel)</span>
+                </label>
+                <input asp-for="EventDate" type="datetime-local" class="admin-form-input" />
+                <span asp-validation-for="EventDate" class="text-danger"></span>
+              </div>
+            </div>
+
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">Açıklama</label>
+                <textarea asp-for="Description" class="admin-form-textarea" rows="6" placeholder="Workshop hakkında detaylı açıklama yazın..."></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Etkinlik Detayları -->
+        <div class="admin-form-card">
+          <div class="admin-form-section">
+            <h3 class="admin-form-section-title">
+              Etkinlik Detayları
+            </h3>
+
+            <div class="admin-form-row two-cols">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Mekan
+                  <span class="admin-form-label-optional">(opsiyonel)</span>
+                </label>
+                <input asp-for="Location" class="admin-form-input" placeholder="Örn: İstanbul, Kadıköy" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+              </div>
+
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Kapasite
+                  <span class="admin-form-label-optional">(opsiyonel)</span>
+                </label>
+                <input asp-for="Capacity" type="number" class="admin-form-input" placeholder="Örn: 20" min="1" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Görsel -->
+        <div class="admin-form-card">
+          <div class="admin-form-section">
+            <h3 class="admin-form-section-title">
+              Workshop Görseli
+            </h3>
+
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label class="admin-form-label">
+                  Görsel Yükle
+                  <span class="admin-form-label-optional">(opsiyonel)</span>
+                </label>
+                <input type="file" name="imageFile" accept="image/*" class="admin-form-file-input" />
+                <p class="admin-form-hint">PNG, JPG veya JPEG formatında görsel yükleyebilirsiniz.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="admin-form-actions">
+          <button type="submit" class="admin-btn-primary">
+            Workshop Oluştur
+          </button>
+          <a class="admin-btn-secondary" asp-area="Admin" asp-controller="AdminWorkshoplar" asp-action="Index">
+            İptal
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

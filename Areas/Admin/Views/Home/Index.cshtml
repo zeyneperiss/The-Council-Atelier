@@ -1,0 +1,163 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="admin-dashboard">
+    <!-- Header -->
+    <div class="admin-dashboard-header">
+        <div>
+            <h1 class="admin-dashboard-title">Dashboard</h1>
+            <p class="admin-dashboard-subtitle">The Council Atelier Yönetim Paneli</p>
+        </div>
+        <a href="/" class="admin-btn admin-btn-outline">
+            <span>Siteyi Görüntüle</span>
+        </a>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="admin-stats-grid">
+        <!-- Makaleler -->
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon soft-blue"></div>
+            <div class="admin-stat-content">
+                <div class="admin-stat-value">@Model.TotalArticles</div>
+                <div class="admin-stat-label">Makaleler</div>
+            </div>
+            <a href="/Admin/AdminMakaleler" class="admin-stat-link">Görüntüle →</a>
+        </div>
+
+        <!-- Programlar -->
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon soft-purple"></div>
+            <div class="admin-stat-content">
+                <div class="admin-stat-value">@Model.TotalPrograms</div>
+                <div class="admin-stat-label">Programlar</div>
+            </div>
+            <a href="/Admin/AdminProgramlar" class="admin-stat-link">Görüntüle →</a>
+        </div>
+
+        <!-- Workshoplar -->
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon soft-green"></div>
+            <div class="admin-stat-content">
+                <div class="admin-stat-value">@Model.TotalWorkshops</div>
+                <div class="admin-stat-label">Workshoplar</div>
+            </div>
+            <a href="/Admin/AdminWorkshoplar" class="admin-stat-link">Görüntüle →</a>
+        </div>
+
+        <!-- Başvurular -->
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon soft-orange"></div>
+            <div class="admin-stat-content">
+                <div class="admin-stat-value">@Model.TotalApplications</div>
+                <div class="admin-stat-label">Başvurular</div>
+                @if (Model.UnreadApplications > 0)
+                {
+                    <div class="admin-stat-badge">@Model.UnreadApplications Yeni</div>
+                }
+            </div>
+            <a href="/Admin/AdminBasvurular" class="admin-stat-link">Görüntüle →</a>
+        </div>
+
+        <!-- Öğrenciler -->
+        <div class="admin-stat-card">
+            <div class="admin-stat-icon soft-pink"></div>
+            <div class="admin-stat-content">
+                <div class="admin-stat-value">@Model.TotalStudents</div>
+                <div class="admin-stat-label">Kayıtlı Öğrenciler</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions & Recent Activity -->
+    <div class="admin-dashboard-grid">
+        <!-- Quick Actions -->
+        <div class="admin-dashboard-card">
+            <h2 class="admin-dashboard-card-title">Hızlı İşlemler</h2>
+            <div class="admin-quick-actions">
+                <a href="/Admin/AdminMakaleler/Create" class="admin-quick-action">
+                    <span class="admin-quick-action-icon">+</span>
+                    <div>
+                        <div class="admin-quick-action-title">Yeni Makale</div>
+                        <div class="admin-quick-action-desc">Makale oluştur</div>
+                    </div>
+                </a>
+                <a href="/Admin/AdminProgramlar/Create" class="admin-quick-action">
+                    <span class="admin-quick-action-icon">+</span>
+                    <div>
+                        <div class="admin-quick-action-title">Yeni Program</div>
+                        <div class="admin-quick-action-desc">Program ekle</div>
+                    </div>
+                </a>
+                <a href="/Admin/AdminWorkshoplar/Create" class="admin-quick-action">
+                    <span class="admin-quick-action-icon">+</span>
+                    <div>
+                        <div class="admin-quick-action-title">Yeni Workshop</div>
+                        <div class="admin-quick-action-desc">Workshop oluştur</div>
+                    </div>
+                </a>
+                <a href="/Admin/AdminBasvurular" class="admin-quick-action">
+                    <span class="admin-quick-action-icon">→</span>
+                    <div>
+                        <div class="admin-quick-action-title">Başvuruları Gör</div>
+                        <div class="admin-quick-action-desc">Tüm başvurular</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Applications -->
+        <div class="admin-dashboard-card">
+            <h2 class="admin-dashboard-card-title">Son Başvurular</h2>
+            @if (Model.RecentApplications.Count == 0)
+            {
+                <div class="admin-empty-state-small">
+                    <p>Henüz başvuru yok</p>
+                </div>
+            }
+            else
+            {
+                <div class="admin-recent-list">
+                    @foreach (var app in Model.RecentApplications)
+                    {
+                        <div class="admin-recent-item">
+                            <div class="admin-recent-avatar">
+                                @app.FullName.Substring(0, 1).ToUpper()
+                            </div>
+                            <div class="admin-recent-content">
+                                <div class="admin-recent-name">@app.FullName</div>
+                                <div class="admin-recent-meta">
+                                    @app.Type
+                                    @if (!string.IsNullOrEmpty(app.SelectedItem))
+                                    {
+                                        <span>• @app.SelectedItem</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="admin-recent-time">
+                                @{
+                                    var timeSpan = DateTime.Now - app.CreatedAt.ToLocalTime();
+                                    var timeText = timeSpan.TotalMinutes < 60 
+                                        ? $"{(int)timeSpan.TotalMinutes}dk önce"
+                                        : timeSpan.TotalHours < 24 
+                                            ? $"{(int)timeSpan.TotalHours}sa önce"
+                                            : $"{(int)timeSpan.TotalDays}g önce";
+                                }
+                                @timeText
+                            </div>
+                            @if (!app.IsRead)
+                            {
+                                <span class="admin-recent-badge">Yeni</span>
+                            }
+                        </div>
+                    }
+                </div>
+                <a href="/Admin/AdminBasvurular" class="admin-view-all">
+                    Tümünü Gör →
+                </a>
+            }
+        </div>
+    </div>
+</div>
