@@ -5,7 +5,7 @@ The Council Atelier, modern bir moda atölyesi veya tasarım stüdyosu için gel
 ## 🚀 Teknik Özellikler
 
 - **Framework:** .NET 8.0 / 7.0 (ASP.NET Core MVC)
-- **Database:** Entity Framework Core (Code First Yaklaşımı)
+- **Database:** SQL SERVER , Entity Framework Core (Code First Yaklaşımı)
 - **Güvenlik:** Şifreleme algoritmaları ile desteklenmiş kullanıcı doğrulama sistemi (HashGenerator).
 - **Mimari:** - **Areas:** Admin ve User arayüzleri birbirinden tamamen izole edilmiştir.
   - **Repository Pattern & Dependency Injection:** Esnek ve test edilebilir bir kod yapısı.
